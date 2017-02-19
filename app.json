@@ -1,17 +1,17 @@
 {
   "name": "Parse Server Example",
   "description": "An example Parse API server using the parse-server module",
-  "repository": "https://github.com/ParsePlatform/parse-server-example",
+  "repository": "https://github.com/bk723/parse-server-example",
   "logo": "https://avatars0.githubusercontent.com/u/1294580?v=3&s=200",
   "keywords": ["node", "express", "parse"],
   "env": {
     "PARSE_MOUNT": {
       "description": "Configure Parse API route.",
-      "value": "/parse"
+      "value": "/"
     },
     "APP_ID": {
       "description": "A unique identifier for your app.",
-      "value": "myAppId"
+      "value": "track920723"
     },
     "MASTER_KEY": {
       "description": "A key that overrides all permissions. Keep this secret.",
@@ -19,7 +19,10 @@
     },
     "SERVER_URL": {
       "description": "URL to connect to your Heroku instance (update with your app's name + PARSE_MOUNT)",
-      "value": "http://yourappname.herokuapp.com/parse"
+      "value": "http://track-ddr.herokuapp.com/parse"
+    },
+    "MONGODB_URI": {
+      "value": "mongodb://track:ddrteam@ds011872.mlab.com:11872/track"
     }
   },
   "image": "heroku/nodejs",
