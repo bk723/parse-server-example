@@ -3,8 +3,6 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
-
-
 /**
  * special thanks to this code https://groups.google.com/forum/#!topic/parse-developers/UUvTreGYOrI
  */
@@ -12,8 +10,7 @@ Parse.Cloud.define('hello', function(req, res) {
 /**
 * Load needed modules.
 */
-
-//var us = require('underscore');
+//var _ = require('underscore');
 var Buffer = require('buffer').Buffer;
 
 var clientsIds = ['iOSClientId','androidClientId'];
@@ -25,7 +22,6 @@ var googlePlusEndpoint = 'https://www.googleapis.com/plus/v1/people/me?access_to
  * disable public access for Get/Find/Create/Update/Delete operations.
  * Only the master key should be able to query or write to these classes.
  */
-
 var TokenStorage = Parse.Object.extend("TokenStorage");
 
 var restrictedAcl = new Parse.ACL();
@@ -53,7 +49,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         var tokenInfoData = JSON.parse(httpResponse.text);
         // "Once you get these claims, you still need to check that the aud claim contains one of your app's client IDs."
         // from https://developers.google.com/identity/sign-in/ios/backend-auth
-        if ( tokenInfoData && ( us.contains(clientsIds,tokenInfoData.aud) )) {
+        if ( tokenInfoData && ( _.contains(clientsIds,tokenInfoData.aud) )) {
             var userId = tokenInfoData.sub;
             return upsertGoogleUser(data.accessToken, userId);
         } else {
@@ -70,7 +66,6 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         }
         res.error(JSON.stringify(error));
     });
-    
 
 });
 
@@ -85,7 +80,6 @@ var callTokenInfoEndPoint = function(accessToken) {
  * If the user is found, update the accessToken (if necessary) and return
  *   the user.  If not, register a new one.
  */
-
 var upsertGoogleUser = function(accessToken, userId) {
 
     var query = new Parse.Query(TokenStorage);
@@ -113,8 +107,8 @@ var upsertGoogleUser = function(accessToken, userId) {
             });
         }).then(function(obj) {
             password = new Buffer(24);
-            us.times(24, function(i) {
-                password.set(i, us.random(0, 255));
+            _.times(24, function(i) {
+                password.set(i, _.random(0, 255));
             });
             password = password.toString('base64');
             user.setPassword(password);
@@ -144,9 +138,9 @@ var newGoogleUser = function(accessToken) {
     }).then(function(gPlusData){
         var username = new Buffer(24);
         var password = new Buffer(24);
-        us.times(24, function(i) {
-            username.set(i, us.random(0, 255));
-            password.set(i, us.random(0, 255));
+        _.times(24, function(i) {
+            username.set(i, _.random(0, 255));
+            password.set(i, _.random(0, 255));
         });
 
         user.set("username", username.toString('base64'));
@@ -158,7 +152,7 @@ var newGoogleUser = function(accessToken) {
         //    "type": "account"
         //   }
         // ]
-        
+        /*
         user.set("email", gPlusData.emails[0].value);
 
         // "name": {
@@ -175,7 +169,7 @@ var newGoogleUser = function(accessToken) {
         user.set('imageUrl', gPlusData.image.url);
         
         user.set('accountType', 'g');
-        
+        */
         return user.signUp().then(function(user) {
             var tokenStorage = new TokenStorage();
             tokenStorage.set('user', user);
