@@ -147,6 +147,7 @@ var newGoogleUser = function(accessToken) {
         //    "type": "account"
         //   }
         // ]
+        /*
         user.set("email", gPlusData.emails[0].value);
 
         // "name": {
@@ -163,7 +164,7 @@ var newGoogleUser = function(accessToken) {
         user.set('imageUrl', gPlusData.image.url);
         
         user.set('accountType', 'g');
-
+        */
         return user.signUp().then(function(user) {
             var tokenStorage = new TokenStorage();
             tokenStorage.set('user', user);
