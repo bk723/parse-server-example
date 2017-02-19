@@ -63,9 +63,11 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
 
     }).then(function(user) {  
          // send back the session token in the response to be used with 'become/becomeInBackground' functions
+      console.log('point: success');
         res.success(user.getSessionToken());
 
     }, function(error) {      
+      console.log('point: showing an error');
         if (error && error.code && error.error) {
             error = error.code + ' ' + error.error;
         }
@@ -75,6 +77,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
 });
 
 var callTokenInfoEndPoint = function(accessToken) {
+      console.log('point: call token info end point inside');
     return Parse.Cloud.httpRequest({
         url: googleValidateEndpoint + accessToken
     });
@@ -95,6 +98,7 @@ var upsertGoogleUser = function(accessToken, userId) {
     }).then(function(tokenStorage) {
 
         if (!tokenStorage) {
+      console.log('point: newGoogleUser call');
             return newGoogleUser(accessToken);
         }
 
@@ -130,6 +134,7 @@ var upsertGoogleUser = function(accessToken, userId) {
 var newGoogleUser = function(accessToken) {
     var user = new Parse.User();
 
+      console.log('point: inside of newGoogleUser');
     return Parse.Cloud.httpRequest({
         url: googlePlusEndpoint + accessToken
     }).then(function(httpResponse) {
