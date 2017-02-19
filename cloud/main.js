@@ -90,16 +90,13 @@ var callTokenInfoEndPoint = function(accessToken) {
  */
 var upsertGoogleUser = function(accessToken, userId) {
 
-  console.log('point: inside of upsertGoogleUser');
     var query = new Parse.Query(TokenStorage);
-  console.log('point: query initiated');
     query.equalTo('accountId', userId);
   console.log('point: query setted');
     return query.first({
-        useMasterKey: true
-    }).then(function(tokenStorage) {
+      useMasterKey: true,
+      success: function(tokenStorage) {
   console.log('point: the function after query');
-
         if (!tokenStorage) {
       console.log('point: newGoogleUser call');
             return newGoogleUser(accessToken);
@@ -131,6 +128,11 @@ var upsertGoogleUser = function(accessToken, userId) {
         }).then(function(user) {
             return Parse.Promise.as(user);
         });
+      },
+      error: function(error) {
+            return Parse.Promise.error("error finding tokenstorage");
+      }
+    }
     });
 };
 
