@@ -14,12 +14,13 @@ Parse.Cloud.define('hello', function(req, res) {
 */
 /*
 var _ = require('underscore');
+*/
 var Buffer = require('buffer').Buffer;
 
 var clientsIds = ['iOSClientId','androidClientId'];
 var googleValidateEndpoint = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var googlePlusEndpoint = 'https://www.googleapis.com/plus/v1/people/me?access_token=';
-*/
+
 /**
  * In the Data Browser, set the Class Permissions for this class to
  * disable public access for Get/Find/Create/Update/Delete operations.
