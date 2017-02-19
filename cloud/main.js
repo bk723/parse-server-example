@@ -12,24 +12,26 @@ Parse.Cloud.define('hello', function(req, res) {
 /**
 * Load needed modules.
 */
+/*
 var _ = require('underscore');
 var Buffer = require('buffer').Buffer;
 
 var clientsIds = ['iOSClientId','androidClientId'];
 var googleValidateEndpoint = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var googlePlusEndpoint = 'https://www.googleapis.com/plus/v1/people/me?access_token=';
-
+*/
 /**
  * In the Data Browser, set the Class Permissions for this class to
  * disable public access for Get/Find/Create/Update/Delete operations.
  * Only the master key should be able to query or write to these classes.
  */
+/*
 var TokenStorage = Parse.Object.extend("TokenStorage");
 
 var restrictedAcl = new Parse.ACL();
 restrictedAcl.setPublicReadAccess(false);
 restrictedAcl.setPublicWriteAccess(false);
-
+*/
 /**
 * Validade accessToken, if valid, call upsertGoogleUser function
 * accessToken param is required
