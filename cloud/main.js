@@ -53,8 +53,8 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
             var userId = tokenInfoData.sub;
             return upsertGoogleUser(data.accessToken, userId);
         } else {
-            return Parse.Promise.error(tokenInfoData.aud);
-//            return Parse.Promise.error("Unable to parse Google data");
+//            return Parse.Promise.error(tokenInfoData.aud);
+            return Parse.Promise.error("Unable to parse Google data");
         }
 
     }).then(function(user) {  
