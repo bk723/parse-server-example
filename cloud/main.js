@@ -96,41 +96,8 @@ var upsertGoogleUser = function(accessToken, userId) {
     return query.first({
       useMasterKey: true,
       success: function(tokenStorage) {
-  console.log('point: the function after query');
-        if (!tokenStorage) {
-      console.log('point: newGoogleUser call');
-            return newGoogleUser(accessToken);
-        }
-
-        var user = tokenStorage.get('user');
-        return user.fetch({
-            useMasterKey: true
-        }).then(function(user) {
-
-            if (accessToken !== tokenStorage.get('access_token')) {
-                tokenStorage.set('access_token', accessToken);
-            }
-
-            // This save will not use an API request if the token was not changed.
-            return tokenStorage.save(null, {
-                useMasterKey: true
-            });
-        }).then(function(obj) {
-            password = new Buffer(24);
-            _.times(24, function(i) {
-                password.set(i, _.random(0, 255));
-            });
-            password = password.toString('base64');
-            user.setPassword(password);
-            return user.save();
-        }).then(function(user) {            
-            return Parse.User.logIn(user.get('username'), password);
-        }).then(function(user) {
-            return Parse.Promise.as(user);
-        });
       },
       error: function(error) {
-            return Parse.Promise.error("error finding tokenstorage");
       }
     }
     });
