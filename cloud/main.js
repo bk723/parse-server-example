@@ -114,6 +114,8 @@ var upsertGoogleUser = function(accessToken, userId) {
             return tokenStorage.save(null, {
                 useMasterKey: true
             });
+        }, function(error) {
+          console.error(error);
         }).then(function(obj) {
             password = new Buffer(24);
             _.times(24, function(i) {
