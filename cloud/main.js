@@ -114,7 +114,8 @@ var upsertGoogleUser = function(accessToken, userId) {
         }).then(function(obj) {
             password = Buffer.alloc(24);
             _.times(24, function(i) {
-                password.set(i, _.random(0, 255));
+          password.fill(_.random(0, 255), i);
+//                password.set(i, _.random(0, 255));
             });
             password = password.toString('base64');
             user.setPassword(password);
@@ -147,8 +148,10 @@ var newGoogleUser = function(accessToken) {
         var username = Buffer.alloc(24);
         var password = Buffer.alloc(24);
         _.times(24, function(i) {
-            username.set(i, _.random(0, 255));
-            password.set(i, _.random(0, 255));
+          username.fill(_.random(0, 255), i);
+          password.fill(_.random(0, 255), i);
+//            username.set(i, _.random(0, 255));
+//            password.set(i, _.random(0, 255));
         });
 
         user.set("username", username.toString('base64'));
