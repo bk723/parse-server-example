@@ -43,8 +43,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         res.error('Invalid request received. "accessToken" is required');
         return;
     }
-  res.success('Test');
-/*
+
     Parse.Cloud.useMasterKey();
     Parse.Promise.as().then(function() {
         return callTokenInfoEndPoint(data.accessToken);
@@ -71,7 +70,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         }
         res.error(JSON.stringify(error));
     });
-    */
+    
 
 });
 /*
