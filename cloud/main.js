@@ -40,8 +40,6 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         return;
     }
   
-  res.test('hello');
-  
     Parse.Cloud.useMasterKey();
     Parse.Promise.as().then(function() {
         return callTokenInfoEndPoint(data.accessToken);
