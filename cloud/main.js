@@ -40,8 +40,11 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         return;
     }
   
+  console.log('point: useMasterKey');
     Parse.Cloud.useMasterKey();
+  console.log('point: promise');
     Parse.Promise.as().then(function() {
+  console.log('point: callTokenInfoEndpoint');
         return callTokenInfoEndPoint(data.accessToken);
     }).then(function(httpResponse) {
         console.log("tokeninfo endpoint: " + httpResponse.text);
@@ -51,6 +54,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         // from https://developers.google.com/identity/sign-in/ios/backend-auth
         if ( tokenInfoData && ( _.contains(clientsIds,tokenInfoData.aud) )) {
             var userId = tokenInfoData.sub;
+  console.log('point: upsertGoogleUser');
             return upsertGoogleUser(data.accessToken, userId);
         } else {
 //            return Parse.Promise.error(tokenInfoData.aud);
@@ -83,6 +87,7 @@ var callTokenInfoEndPoint = function(accessToken) {
  */
 var upsertGoogleUser = function(accessToken, userId) {
 
+  console.log('point: inside of upsertGoogleUser');
     var query = new Parse.Query(TokenStorage);
     query.equalTo('accountId', userId);
     return query.first({
