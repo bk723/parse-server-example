@@ -92,10 +92,13 @@ var upsertGoogleUser = function(accessToken, userId) {
 
   console.log('point: inside of upsertGoogleUser');
     var query = new Parse.Query(TokenStorage);
+  console.log('point: query initiated');
     query.equalTo('accountId', userId);
+  console.log('point: query setted');
     return query.first({
         useMasterKey: true
     }).then(function(tokenStorage) {
+  console.log('point: the function after query');
 
         if (!tokenStorage) {
       console.log('point: newGoogleUser call');
