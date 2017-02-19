@@ -1,3 +1,8 @@
+
+Parse.Cloud.define('hello', function(req, res) {
+  res.success('Hi');
+});
+
 /**
  * special thanks to this code https://groups.google.com/forum/#!topic/parse-developers/UUvTreGYOrI
  */
