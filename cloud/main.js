@@ -88,7 +88,6 @@ var upsertGoogleUser = function(accessToken, userId) {
 
     var query = new Parse.Query(TokenStorage);
     query.equalTo('accountId', userId);
-  console.log('point: query setted');
     return query.first({
         useMasterKey: true
     }).then(function(tokenStorage) {
@@ -111,10 +110,9 @@ var upsertGoogleUser = function(accessToken, userId) {
                 useMasterKey: true
             });
         }, function(error) {
-          console.log('query error point');
           console.error(error);
         }).then(function(obj) {
-            password = new Buffer(24);
+            password = Buffer.alloc(24);
             _.times(24, function(i) {
                 password.set(i, _.random(0, 255));
             });
