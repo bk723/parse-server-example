@@ -13,7 +13,7 @@ Parse.Cloud.define('hello', function(req, res) {
 var _ = require('underscore');
 var Buffer = require('buffer').Buffer;
 
-var clientsIds = '742924148192-nu7pqsmoq2cgm1pi8mtjmrnh2e29v4fn.apps.googleusercontent.com'; // and android client id
+var clientsIds = ['742924148192-nu7pqsmoq2cgm1pi8mtjmrnh2e29v4fn.apps.googleusercontent.com', 'androidClientId'];
 var googleValidateEndpoint = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var googlePlusEndpoint = 'https://www.googleapis.com/plus/v1/people/me?access_token=';
 
@@ -53,7 +53,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
             var userId = tokenInfoData.sub;
             return upsertGoogleUser(data.accessToken, userId);
         } else {
-            return Parse.Promise.error(tokenInfoData);
+            return Parse.Promise.error(tokenInfoData.aud);
 //            return Parse.Promise.error("Unable to parse Google data");
         }
 
