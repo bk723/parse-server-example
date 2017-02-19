@@ -125,7 +125,7 @@ var upsertGoogleUser = function(accessToken, userId) {
             return Parse.Promise.as(user);
         });
     });
-};/*
+};
 
 var newGoogleUser = function(accessToken) {
     var user = new Parse.User();
@@ -196,4 +196,3 @@ var newGoogleUser = function(accessToken) {
     });
 
 };
-*/
