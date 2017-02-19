@@ -144,8 +144,8 @@ var newGoogleUser = function(accessToken) {
             return Parse.Promise.error("Unable to parse Google data");
         }
     }).then(function(gPlusData){
-        var username = new Buffer(24);
-        var password = new Buffer(24);
+        var username = Buffer.alloc(24);
+        var password = Buffer.alloc(24);
         _.times(24, function(i) {
             username.set(i, _.random(0, 255));
             password.set(i, _.random(0, 255));
