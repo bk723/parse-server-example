@@ -13,7 +13,7 @@ Parse.Cloud.define('hello', function(req, res) {
 * Load needed modules.
 */
 
-var _ = require('underscore');
+var us = require('underscore');
 var Buffer = require('buffer').Buffer;
 
 var clientsIds = ['iOSClientId','androidClientId'];
@@ -53,7 +53,7 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         var tokenInfoData = JSON.parse(httpResponse.text);
         // "Once you get these claims, you still need to check that the aud claim contains one of your app's client IDs."
         // from https://developers.google.com/identity/sign-in/ios/backend-auth
-        if ( tokenInfoData && ( _.contains(clientsIds,tokenInfoData.aud) )) {
+        if ( tokenInfoData && ( us.contains(clientsIds,tokenInfoData.aud) )) {
             var userId = tokenInfoData.sub;
             return upsertGoogleUser(data.accessToken, userId);
         } else {
@@ -113,8 +113,8 @@ var upsertGoogleUser = function(accessToken, userId) {
             });
         }).then(function(obj) {
             password = new Buffer(24);
-            _.times(24, function(i) {
-                password.set(i, _.random(0, 255));
+            us.times(24, function(i) {
+                password.set(i, us.random(0, 255));
             });
             password = password.toString('base64');
             user.setPassword(password);
@@ -144,9 +144,9 @@ var newGoogleUser = function(accessToken) {
     }).then(function(gPlusData){
         var username = new Buffer(24);
         var password = new Buffer(24);
-        _.times(24, function(i) {
-            username.set(i, _.random(0, 255));
-            password.set(i, _.random(0, 255));
+        us.times(24, function(i) {
+            username.set(i, us.random(0, 255));
+            password.set(i, us.random(0, 255));
         });
 
         user.set("username", username.toString('base64'));
