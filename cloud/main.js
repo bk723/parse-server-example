@@ -73,19 +73,19 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
     
 
 });
-/*
+
 var callTokenInfoEndPoint = function(accessToken) {
     return Parse.Cloud.httpRequest({
         url: googleValidateEndpoint + accessToken
     });
-};*/
+};
 
 /**
  * This function checks to see if this Google user has logged in before.
  * If the user is found, update the accessToken (if necessary) and return
  *   the user.  If not, register a new one.
  */
-/*
+
 var upsertGoogleUser = function(accessToken, userId) {
 
     var query = new Parse.Query(TokenStorage);
@@ -125,7 +125,7 @@ var upsertGoogleUser = function(accessToken, userId) {
             return Parse.Promise.as(user);
         });
     });
-};
+};/*
 
 var newGoogleUser = function(accessToken) {
     var user = new Parse.User();
