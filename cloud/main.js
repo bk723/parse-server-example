@@ -12,9 +12,8 @@ Parse.Cloud.define('hello', function(req, res) {
 /**
 * Load needed modules.
 */
-/*
+
 var _ = require('underscore');
-*/
 var Buffer = require('buffer').Buffer;
 
 var clientsIds = ['iOSClientId','androidClientId'];
