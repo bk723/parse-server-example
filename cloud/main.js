@@ -10,7 +10,7 @@ Parse.Cloud.define('hello', function(req, res) {
 /**
 * Load needed modules.
 */
-var _ = require('underscore')._;
+//var _ = require('underscore');
 var Buffer = require('buffer').Buffer;
 
 var clientsIds = ['iOSClientId','androidClientId'];
@@ -39,7 +39,9 @@ Parse.Cloud.define('accessGoogleUser', function(req, res) {
         res.error('Invalid request received. "accessToken" is required');
         return;
     }
-
+  
+  res.test('hello');
+  
     Parse.Cloud.useMasterKey();
     Parse.Promise.as().then(function() {
         return callTokenInfoEndPoint(data.accessToken);
