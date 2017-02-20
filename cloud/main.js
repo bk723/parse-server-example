@@ -105,22 +105,21 @@ var upsertGoogleUser = function(accessToken, userId) {
             // This save will not use an API request if the token was not changed.
             return tokenStorage.save(null, {
                 useMasterKey: true
+            }).then(function(obj){
+              password = Buffer.alloc(24);
+              _.times(24, function(i) {
+                password.fill(_.random(0, 255), i);
+              });
+              password = password.toString('base64');
+              user.setPassword(password);
+              return user.save();
+            }).then(function(user) {    
+              return Parse.User.logIn(user.get('username'), password);
+            }).then(function(user) {
+              return Parse.Promise.as(user);
             });
         }, function(error) {
           console.error(error);
-        }).then(function(obj) {
-            password = Buffer.alloc(24);
-            _.times(24, function(i) {
-          password.fill(_.random(0, 255), i);
-//                password.set(i, _.random(0, 255));
-            });
-            password = password.toString('base64');
-            user.setPassword(password);
-            return user.save();
-        }).then(function(user) {            
-            return Parse.User.logIn(user.get('username'), password);
-        }).then(function(user) {
-            return Parse.Promise.as(user);
         });
     });
 
