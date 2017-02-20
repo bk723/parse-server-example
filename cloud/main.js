@@ -97,7 +97,10 @@ var upsertGoogleUser = function(accessToken, userId) {
         return user.fetch({
             useMasterKey: true
         }).then(function(user) {
-
+          
+          console.log('is there a user?');
+          console.log(user);
+          
             if (accessToken !== tokenStorage.get('access_token')) {
                 tokenStorage.set('access_token', accessToken);
             }
@@ -177,6 +180,10 @@ var newGoogleUser = function(accessToken) {
         user.set('accountType', 'g');
         */
         return user.signUp().then(function(user) {
+          
+          console.log('sign up success and user is ');
+          console.log(user);
+          
             var tokenStorage = new TokenStorage();
             tokenStorage.set('user', user);
             tokenStorage.set('accountId', gPlusData.id);
