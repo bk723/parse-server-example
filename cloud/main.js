@@ -192,6 +192,9 @@ var newGoogleUser = function(accessToken) {
             return tokenStorage.save(null, {
                 useMasterKey: true
             });
+        }, function(error) {
+          console.log('error signing up');
+          console.error(error);
         }).then(function(tokenStorage) {
             return upsertGoogleUser(accessToken, gPlusData.id);
         });
