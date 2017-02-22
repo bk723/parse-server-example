@@ -22,7 +22,7 @@ var api = new ParseServer({
   },
   appName: 'TRACK',
 
-  publicServerURL: 'https://track-ddr.herokuapp.com/'
+  publicServerURL: process.env.SERVER_URL
 /*,
   emailAdapter: {
     module: 'parse-server-mailgun',
