@@ -27,7 +27,7 @@ var api = new ParseServer({
     options: {
       fromAddress: process.env.EMAIL_FROM_ADDRESS,
       domain: process.env.EMAIL_DOMAIN,
-      apiKey: process.env.EMAIL_API_KEY
+      apiKey: process.env.EMAIL_API_KEY,
     }
   }
 });
