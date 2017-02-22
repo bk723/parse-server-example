@@ -33,7 +33,7 @@ var api = new ParseServer({
         // Your domain from mailgun.com
         domain: 'ddr-track.com',
         // Your API key from mailgun.com
-        apiKey: 'key-805d60593c839dcc97ab61e03f36360e',
+        apiKey: 'key-805d60593c839dcc97ab61e03f36360e'/*,
         // The template section
         templates: {
             passwordResetEmail: {
@@ -56,6 +56,7 @@ var api = new ParseServer({
                 pathHtml: resolve(__dirname, '/templates/custom_alert.html')
             }
         }
+                                                       */
     }
   }
 });
