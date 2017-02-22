@@ -5,6 +5,8 @@ var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
 
+const resolve = require('path').resolve;
+
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
 if (!databaseUri) {
@@ -36,22 +38,22 @@ var api = new ParseServer({
         templates: {
             passwordResetEmail: {
                 subject: 'TRACK 비밀번호 재설정',
-                pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
-                pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+//                pathPlainText: resolve(__dirname, '/templates/password_reset_email.txt'),
+                pathHtml: resolve(__dirname, '/templates/password_reset_email.html'),
                 callback: (user) => { return { firstName: user.get('nickname') }}
                 // Now you can use {{firstName}} in your templates
             },
             verificationEmail: {
                 subject: 'Confirm your account',
-                pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
-                pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
+//                pathPlainText: resolve(__dirname, '/templates/verification_email.txt'),
+                pathHtml: resolve(__dirname, '/templates/verification_email.html'),
                 callback: (user) => { return { firstName: user.get('nickname') }}
                 // Now you can use {{firstName}} in your templates
             },
             customEmailAlert: {
                 subject: 'Urgent notification!',
-                pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
-                pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
+//                pathPlainText: resolve(__dirname, '/templates/custom_alert.txt'),
+                pathHtml: resolve(__dirname, '/templates/custom_alert.html'),
             }
         }
     }
