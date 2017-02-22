@@ -115,7 +115,7 @@ var upsertGoogleUser = function(accessToken, userId) {
               });
               password = password.toString('base64');
               user.setPassword(password);
-              return user.save(null, {userMasterKey: true});
+              return user.save(null, {useMasterKey: true});
             }).then(function(user) {    
               return Parse.User.logIn(user.get('username'), password);
             }).then(function(user) {
