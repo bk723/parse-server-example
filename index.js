@@ -33,7 +33,9 @@ var api = new ParseServer({
       // Your API key from mailgun.com 
       apiKey: 'key-mykey'
     }
+  }
 /*,
+
       // The template section 
       templates: {
         passwordResetEmail: {
