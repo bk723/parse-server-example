@@ -22,6 +22,8 @@ var api = new ParseServer({
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
+                          console.log('dir name is ');
+                          console.log(__dirname);
   appName: 'TRACK',
 
   publicServerURL: process.env.SERVER_URL,
@@ -34,6 +36,28 @@ var api = new ParseServer({
         domain: 'ddr-track.com',
         // Your API key from mailgun.com
         apiKey: 'key-805d60593c839dcc97ab61e03f36360e',
+                          templates: {
+                          passwordResetEmail: {
+                          subject: 'Reset your password',
+                          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
+                          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+                          callback: (user) => { return { firstName: user.get('firstName') }}
+                          // Now you can use {{firstName}} in your templates
+                          },
+                          verificationEmail: {
+                          subject: 'Confirm your account',
+                          pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
+                          pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
+                          callback: (user) => { return { firstName: user.get('firstName') }}
+                          // Now you can use {{firstName}} in your templates
+                          },
+                          customEmailAlert: {
+                          subject: 'Urgent notification!',
+                          pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
+                          pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
+                          }
+                          }
+                          /*
         // The template section
         templates: {
             passwordResetEmail: {
@@ -55,7 +79,7 @@ var api = new ParseServer({
                 pathPlainText: resolve(__dirname, '/templates/custom_alert.txt')//,
 //                pathHtml: resolve(__dirname, '/templates/custom_alert.html')
             }
-        }
+        }*/
     }
   }
                           
