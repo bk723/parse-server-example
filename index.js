@@ -21,14 +21,37 @@ var api = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
   appName: 'TRACK',
-  publicServerURL: process.env.SERVER_URL,
+  publicServerURL: 'https://track-ddr.herokuapp.com/',
   emailAdapter: {
-    module: 'parse-server-simple-mailgun-adapter',
+    module: 'parse-server-mailgun',
     options: {
-      fromAddress: process.env.EMAIL_FROM_ADDRESS,
-      domain: process.env.EMAIL_DOMAIN,
-      apiKey: process.env.EMAIL_API_KEY,
-    }
+      // The address that your emails come from 
+      fromAddress: 'YourApp <noreply@yourapp.com>',
+      // Your domain from mailgun.com 
+      domain: 'example.com',
+      // Your API key from mailgun.com 
+      apiKey: 'key-mykey',
+      // The template section 
+      templates: {
+        passwordResetEmail: {
+          subject: 'Reset your password',
+          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
+          // Now you can use {{firstName}} in your templates 
+        },
+        verificationEmail: {
+          subject: 'Confirm your account',
+          pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
+          // Now you can use {{firstName}} in your templates 
+        },
+        customEmailAlert: {
+          subject: 'Urgent notification!',
+          pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
+        }
   }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
