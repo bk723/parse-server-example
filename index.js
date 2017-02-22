@@ -22,8 +22,7 @@ var api = new ParseServer({
   },
   appName: 'TRACK',
 
-  publicServerURL: process.env.SERVER_URL
-/*,
+  publicServerURL: process.env.SERVER_URL,
   emailAdapter: {
     module: 'parse-server-mailgun',
     options: {
@@ -32,7 +31,9 @@ var api = new ParseServer({
       // Your domain from mailgun.com 
       domain: 'example.com',
       // Your API key from mailgun.com 
-      apiKey: 'key-mykey',
+      apiKey: 'key-mykey'
+    }
+/*,
       // The template section 
       templates: {
         passwordResetEmail: {
@@ -53,8 +54,7 @@ var api = new ParseServer({
           subject: 'Urgent notification!',
           pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
           pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
-        }
-  }*/
+        }*/
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
