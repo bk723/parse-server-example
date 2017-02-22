@@ -33,6 +33,7 @@ var api = new ParseServer({
         domain: 'ddr-track.com',
         // Your API key from mailgun.com
         apiKey: 'key-805d60593c839dcc97ab61e03f36360e',
+                          /*
                           templates: {
                           passwordResetEmail: {
                           subject: 'Reset your password',
@@ -54,29 +55,29 @@ var api = new ParseServer({
                           pathHtml: resolve(__dirname, './templates/custom_alert.html'),
                           }
                           }
-                          /*
+                          */
         // The template section
         templates: {
             passwordResetEmail: {
                 subject: 'TRACK 비밀번호 재설정',
-                pathPlainText: resolve(__dirname, '/templates/password_reset_email.txt')//,
-//                pathHtml: resolve(__dirname, '/templates/password_reset_email.html'),
-//                callback: (user) => { return { firstName: user.get('nickname') }}
+                pathPlainText: resolve(__dirname, './templates/password_reset_email.txt'),
+//                pathHtml: resolve(__dirname, './templates/password_reset_email.html'),
+                callback: (user) => { return { nickname: user.get('nickname') }}
                 // Now you can use {{firstName}} in your templates
             },
             verificationEmail: {
                 subject: 'TRACK 이메일 계정 확인',
-                pathPlainText: resolve(__dirname, '/templates/verification_email.txt')//,
-//                pathHtml: resolve(__dirname, '/templates/verification_email.html'),
-//                callback: (user) => { return { firstName: user.get('nickname') }}
+                pathPlainText: resolve(__dirname, './templates/verification_email.txt'),
+                pathHtml: resolve(__dirname, './templates/verification_email.html'),
+                callback: (user) => { return { nickname: user.get('nickname') }}
                 // Now you can use {{firstName}} in your templates
             },
             customEmailAlert: {
                 subject: 'Urgent notification!',
-                pathPlainText: resolve(__dirname, '/templates/custom_alert.txt')//,
-//                pathHtml: resolve(__dirname, '/templates/custom_alert.html')
+                pathPlainText: resolve(__dirname, './templates/custom_alert.txt'),
+                pathHtml: resolve(__dirname, './templates/custom_alert.html')
             }
-        }*/
+        }
     }
   }
                           
