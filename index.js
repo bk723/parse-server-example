@@ -24,14 +24,14 @@ var api = new ParseServer({
 
   publicServerURL: process.env.SERVER_URL,
   emailAdapter: {
-    module: 'parse-server-simple-mailgun-adapter',
+    module: 'parse-server-mailgun',
     options: {
       // The address that your emails come from 
-      fromAddress: 'YourApp <noreply@yourapp.com>',
+      fromAddress: 'TRACK <no-reply@ddr-track.com>',
       // Your domain from mailgun.com 
-      domain: 'example.com',
+      domain: 'ddr-track.com',
       // Your API key from mailgun.com 
-      apiKey: 'key-mykey'
+      apiKey: 'key-805d60593c839dcc97ab61e03f36360e'
     }
   }
 /*,
