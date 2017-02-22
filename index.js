@@ -22,10 +22,7 @@ var api = new ParseServer({
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
-                          console.log('dir name is ');
-                          console.log(__dirname);
   appName: 'TRACK',
-
   publicServerURL: process.env.SERVER_URL,
   emailAdapter: {
     module: 'parse-server-mailgun',
