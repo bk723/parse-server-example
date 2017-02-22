@@ -206,3 +206,56 @@ var newGoogleUser = function(accessToken) {
     });
 
 };
+
+Parse.Cloud.define('removeGoogleUser', function(req, res) {
+                   var data = req.params;
+                   
+                   if (!(data && data.accessToken)) {
+                   res.error('Invalid request received. "accessToken" is required');
+                   return;
+                   }
+                   
+                   Parse.Cloud.useMasterKey();
+                   Parse.Promise.as().then(function() {
+                                           return callTokenInfoEndPoint(data.accessToken);
+                                           }).then(function(httpResponse) {
+                                                   console.log("tokeninfo endpoint: " + httpResponse.text);
+                                                   
+                                                   var tokenInfoData = JSON.parse(httpResponse.text);
+                                                   // "Once you get these claims, you still need to check that the aud claim contains one of your app's client IDs."
+                                                   // from https://developers.google.com/identity/sign-in/ios/backend-auth
+                                                   if ( tokenInfoData && ( _.contains(clientsIds,tokenInfoData.aud) )) {
+                                                   var userId = tokenInfoData.sub;
+                                                   return removeTokenStorage(data.accessToken, userId);
+                                                   } else {
+                                                   return Parse.Promise.error("Unable to parse Google data");
+                                                   }
+                                                   
+                                                   }).then(function() {
+                                                           res.success(true);
+                                                           }, function(error) {
+                                                           console.error(error);
+                                                           if (error && error.code && error.error) {
+                                                           error = error.code + ' ' + error.error;
+                                                           }
+                                                           res.error(JSON.stringify(error));
+                                                           });
+                   
+                   });
+
+
+var removeTokenStorage = function(accessToken, userId) {
+    
+    var query = new Parse.Query(TokenStorage);
+    query.equalTo('accountId', userId);
+    return query.first({useMasterKey: true})
+    .then(function(tokenStorage) {
+          if (!tokenStorage) {
+            console.error('TokenStorage not found');
+            return newGoogleUser(accessToken);
+          }
+          return tokenStorage.destroy({useMasterKey: true});
+          });
+};
+
+
