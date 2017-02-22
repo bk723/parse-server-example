@@ -26,37 +26,36 @@ var api = new ParseServer({
   emailAdapter: {
     module: 'parse-server-mailgun',
     options: {
-      // The address that your emails come from 
-      fromAddress: 'TRACK <no-reply@ddr-track.com>',
-      // Your domain from mailgun.com 
-      domain: 'ddr-track.com',
-      // Your API key from mailgun.com 
-      apiKey: 'key-805d60593c839dcc97ab61e03f36360e'
+        // The address that your emails come from
+        fromAddress: 'TRACK <no-reply@ddr-track.com>',
+        // Your domain from mailgun.com
+        domain: 'ddr-track.com',
+        // Your API key from mailgun.com
+        apiKey: 'key-805d60593c839dcc97ab61e03f36360e',
+        // The template section
+        templates: {
+            passwordResetEmail: {
+                subject: 'TRACK 비밀번호 재설정',
+                pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
+                pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+                callback: (user) => { return { firstName: user.get('nickname') }}
+                // Now you can use {{firstName}} in your templates
+            },
+            verificationEmail: {
+                subject: 'Confirm your account',
+                pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
+                pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
+                callback: (user) => { return { firstName: user.get('nickname') }}
+                // Now you can use {{firstName}} in your templates
+            },
+            customEmailAlert: {
+                subject: 'Urgent notification!',
+                pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
+                pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
+            }
+        }
     }
   }
-/*,
-
-      // The template section 
-      templates: {
-        passwordResetEmail: {
-          subject: 'Reset your password',
-          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
-          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
-          callback: (user) => { return { firstName: user.get('firstName') }}
-          // Now you can use {{firstName}} in your templates 
-        },
-        verificationEmail: {
-          subject: 'Confirm your account',
-          pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
-          pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
-          callback: (user) => { return { firstName: user.get('firstName') }}
-          // Now you can use {{firstName}} in your templates 
-        },
-        customEmailAlert: {
-          subject: 'Urgent notification!',
-          pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
-          pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
-        }*/
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
