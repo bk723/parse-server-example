@@ -23,3 +23,7 @@
     "node": ">=4.3"
   }
 }
+{
+    "name": "mailgun.js",
+    "version":"2.0.1"
+}
