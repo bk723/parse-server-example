@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "~4.11.x",
     "kerberos": "~0.0.x",
+    "mailgun.js": "^2.0.1",
     "parse": "~1.8.0",
     "parse-server": "*",
     "parse-server-mailgun": "^2.3.8",
@@ -22,8 +23,4 @@
   "engines": {
     "node": ">=4.3"
   }
-}
-{
-    "name": "mailgun.js",
-    "version":"2.0.1"
 }
