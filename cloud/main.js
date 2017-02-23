@@ -3,6 +3,8 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
+// Google Sign In
+
 /**
  * special thanks to this code https://groups.google.com/forum/#!topic/parse-developers/UUvTreGYOrI
  */
@@ -258,4 +260,22 @@ var removeTokenStorage = function(accessToken, userId) {
           });
 };
 
+// Send email
+
+var mailgun = require('mailgun.js');
+var mg = mailgun.client({
+                        username: 'api',
+                        key: process.env.MAILGUN_API_KEY || '',
+                        public_key: process.env.MAILGUN_PUBLIC_KEY || 'pubkey-yourkeyhere'
+                        });
+
+Parse.Cloud.define("sendMail", function(request, response) {
+                   mg.messages.create('ddr-track.com', {
+                                      from: request.params.nickname" <"+request.params.email+">",
+                                      to: ["ddrtrack@gmail.com"],
+                                      subject: request.params.title,
+                                      message: request.params.content
+                                      })
+                   .then(msg => console.log(msg), err => console.log(err));
+                   });
 
