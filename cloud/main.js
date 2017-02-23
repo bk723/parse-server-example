@@ -270,7 +270,7 @@ var mg = mailgun.client({
                         });
 
 Parse.Cloud.define("sendMail", function(request, response) {
-                   mg.messages.create('ddr-track.com', {
+                   mg.messages.create(process.env.MAILGUN_DOMAIN, {
                                       from: request.params.nickname+" <"+request.params.email+">",
                                       to: ["ddrtrack@gmail.com"],
                                       subject: "[TRACK 앱내 문의] "+request.params.title,

@@ -30,9 +30,9 @@ var api = new ParseServer({
         // The address that your emails come from
         fromAddress: 'TRACK <no-reply@ddr-track.com>',
         // Your domain from mailgun.com
-        domain: 'ddr-track.com',
+        domain: process.env.MAILGUN_DOMAIN || '',
         // Your API key from mailgun.com
-        apiKey: 'key-805d60593c839dcc97ab61e03f36360e',
+        apiKey: process.env.MAILGUN_API_KEY || '',
                           /*
                           templates: {
                           passwordResetEmail: {
