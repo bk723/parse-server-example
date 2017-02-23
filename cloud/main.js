@@ -271,7 +271,7 @@ var mg = mailgun.client({
 
 Parse.Cloud.define("sendMail", function(request, response) {
                    mg.messages.create('ddr-track.com', {
-                                      from: request.params.nickname" <"+request.params.email+">",
+                                      from: request.params.nickname+" <"+request.params.email+">",
                                       to: ["ddrtrack@gmail.com"],
                                       subject: request.params.title,
                                       message: request.params.content
