@@ -273,7 +273,7 @@ Parse.Cloud.define("sendMail", function(request, response) {
                    mg.messages.create('ddr-track.com', {
                                       from: request.params.nickname+" <"+request.params.email+">",
                                       to: ["ddrtrack@gmail.com"],
-                                      subject: request.params.title,
+                                      subject: "[TRACK 앱내 문의] "+request.params.title,
                                       text: request.params.content
                                       })
                    .then(msg => console.log(msg), err => console.log(err));
