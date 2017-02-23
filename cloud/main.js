@@ -276,6 +276,12 @@ Parse.Cloud.define("sendMail", function(request, response) {
                                       subject: "[TRACK 앱내 문의] "+request.params.title,
                                       text: request.params.content
                                       })
-                   .then(msg => console.log(msg), err => console.log(err));
+                   .then(function(msg) {
+                         console.log(msg);
+                         res.success(true);
+                         },function(error) {
+                         console.log(error);
+                         res.error(JSON.stringify(error));
+                         });
                    });
 
