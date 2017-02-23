@@ -278,10 +278,9 @@ Parse.Cloud.define("sendMail", function(request, response) {
                                       })
                    .then(function(msg) {
                          console.log(msg);
-                         res.success(true);
-                         },function(error) {
-                         console.log(error);
-                         res.error(JSON.stringify(error));
+                         response.success(true);
+                         },function(err) {
+                         console.log(err);
                          });
                    });
 
